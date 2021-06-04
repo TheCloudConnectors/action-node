@@ -1,0 +1,12 @@
+
+name: 'Dockerized Yarn Action'
+description: 'Wraps the yarn CLI to enable common yarn commands using a private registry'
+inputs:
+  cmd:
+    description: 'Yarn command'
+    required: true
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.cmd }}
