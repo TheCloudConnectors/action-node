@@ -1,4 +1,6 @@
-FROM node:lts-alpine
+FROM node:lts
+
+USER node
 
 RUN apk add --no-cache git python2 build-base
 
