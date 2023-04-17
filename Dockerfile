@@ -1,4 +1,4 @@
-FROM node:lts-alpine:3.10
+FROM node:lts-alpine3.10
 
 ENV AWSCLI_VERSION='1.18.69'
 
