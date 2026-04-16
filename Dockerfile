@@ -11,11 +11,12 @@ RUN npm i -g --force yarn
 # Install Aikido Safe Chain v1.4.9 for supply chain protection
 # Use a system-wide install dir so it's accessible to USER node
 RUN apk add --no-cache curl && \
-    curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.9/install-safe-chain.sh | sh -s -- --ci --install-dir /usr/local/.safe-chain && \
+    curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.9/install-safe-chain.sh | sh -s -- --ci && \
     apk del curl
-RUN mkdir -p /usr/local/.safe-chain && \
-    printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /usr/local/.safe-chain/config.json
-ENV PATH="/usr/local/.safe-chain/shims:/usr/local/.safe-chain/bin:${PATH}"
+RUN mkdir -p /root/.safe-chain && \
+    printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json && \
+    chmod -R a+rx /root/.safe-chain
+ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
 ENV SAFE_CHAIN_LOGGING=silent
 
