@@ -8,9 +8,9 @@ RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION} --break-system-
 
 RUN npm i -g --force yarn
 
-# Install Aikido Safe Chain v1.4.7 for supply chain protection
+# Install Aikido Safe Chain v1.4.9 for supply chain protection
 RUN apk add --no-cache curl && \
-    curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.7/install-safe-chain.sh | sh -s -- --ci && \
+    curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.9/install-safe-chain.sh | sh -s -- --ci && \
     apk del curl
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=48
