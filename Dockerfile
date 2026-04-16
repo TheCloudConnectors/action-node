@@ -28,6 +28,4 @@ RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
 
-USER node
-
 CMD ["help"]
