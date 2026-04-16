@@ -12,8 +12,10 @@ RUN npm i -g --force yarn
 RUN apk add --no-cache curl && \
     curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.9/install-safe-chain.sh | sh -s -- --ci && \
     apk del curl
+RUN mkdir -p /root/.safe-chain && \
+    printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
-ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=48
+ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
 ENV SAFE_CHAIN_LOGGING=silent
 
 COPY entrypoint.sh /entrypoint.sh
