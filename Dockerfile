@@ -15,7 +15,8 @@ RUN apk add --no-cache curl && \
     apk del curl
 RUN mkdir -p /root/.safe-chain && \
     printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json && \
-    chmod -R a+rx /root/.safe-chain
+    chmod -R a+rx /root/.safe-chain && \
+    chmod a+x /root/.safe-chain/bin/safe-chain
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
 ENV SAFE_CHAIN_LOGGING=normal
