@@ -18,7 +18,7 @@ RUN mkdir -p /root/.safe-chain && \
     chmod -R a+rx /root/.safe-chain
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
-ENV SAFE_CHAIN_LOGGING=silent
+ENV SAFE_CHAIN_LOGGING=normal
 
 COPY entrypoint.sh /entrypoint.sh
 
