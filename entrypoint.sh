@@ -13,7 +13,7 @@ chmod 0600 "$NPM_CONFIG"
 
 CMD="$*"
 if echo "$CMD" | grep -q "^install"; then
-  sh -c "/root/.safe-chain/bin/safe-chain yarn install --frozen-lockfile"
+  sh -c "/root/.safe-chain/bin/safe-chain $(which yarn) install --frozen-lockfile"
 else
   sh -c "yarn $CMD"
 fi
