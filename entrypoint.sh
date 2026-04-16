@@ -11,4 +11,9 @@ echo $NPMRC >> $NPM_CONFIG
 
 chmod 0600 "$NPM_CONFIG"
 
-sh -c "yarn $*"
+CMD="$*"
+if echo "$CMD" | grep -q "^install"; then
+  sh -c "yarn install --frozen-lockfile"
+else
+  sh -c "yarn $CMD"
+fi
