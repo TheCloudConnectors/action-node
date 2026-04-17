@@ -2,6 +2,10 @@
 
 set -e
 
+# Force HOME=/root so Aikido Safe Chain shims can find their config/binary
+# GitHub Actions overrides HOME to /github/home at runtime via docker -e HOME
+export HOME=/root
+
 NPM_CONFIG="${NPM_CONFIG:-"$HOME/.npmrc"}"
 NPM_REGISTRY="${NPM_REGISTRY:-registry.npmjs.org}"
 
@@ -13,7 +17,7 @@ chmod 0600 "$NPM_CONFIG"
 
 CMD="$*"
 if echo "$CMD" | grep -q "^install"; then
-  sh -c "/root/.safe-chain/bin/safe-chain yarn install --frozen-lockfile"
+  yarn install --frozen-lockfile
 else
-  sh -c "yarn $CMD"
+  yarn $CMD
 fi
