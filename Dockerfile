@@ -18,11 +18,11 @@ RUN printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":[
 
 # Make safe-chain accessible to node user (runner expects non-root for file ownership)
 # a+rwX on /root so node user can write .npmrc there
-RUN chmod a+rwx /root && chmod -R a+rx /root/.safe-chain
+RUN chmod a+rwx /root && chmod -R a+rwx /root/.safe-chain
 
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
-ENV SAFE_CHAIN_LOGGING=verbose
+ENV SAFE_CHAIN_LOGGING=normal
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
