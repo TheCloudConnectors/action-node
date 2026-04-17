@@ -18,7 +18,7 @@ RUN printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":[
 
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
-ENV SAFE_CHAIN_LOGGING=normal
+ENV SAFE_CHAIN_LOGGING=verbose
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
