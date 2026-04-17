@@ -16,6 +16,13 @@ echo $NPMRC >> $NPM_CONFIG
 chmod 0600 "$NPM_CONFIG"
 
 CMD="$*"
+
+# Debug: verify which yarn binary is being used
+echo "[debug] which yarn: $(which yarn)"
+echo "[debug] HOME=$HOME"
+echo "[debug] ls shims: $(ls /root/.safe-chain/shims/ 2>/dev/null || echo 'not found')"
+cat /root/.safe-chain/shims/yarn 2>/dev/null || echo "[debug] shim file not found"
+
 if echo "$CMD" | grep -q "^install"; then
   yarn install --frozen-lockfile
 else
