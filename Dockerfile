@@ -16,12 +16,18 @@ RUN apk add --no-cache curl && \
 # Safe Chain config: 30-day minimum package age, exclude @thecloudconnectors scope
 RUN printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json
 
+# Make safe-chain accessible to node user (runner expects non-root for file ownership)
+# a+rwX on /root so node user can write .npmrc there
+RUN chmod a+rwx /root && chmod -R a+rx /root/.safe-chain
+
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
 ENV SAFE_CHAIN_LOGGING=verbose
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+USER node
 
 ENTRYPOINT ["/entrypoint.sh"]
 CMD ["help"]
