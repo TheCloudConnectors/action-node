@@ -30,3 +30,9 @@ if echo "$CMD" | grep -q "^install"; then
 else
   yarn $CMD
 fi
+
+# Debug: check for safe-chain log files
+echo "[debug] safe-chain logs:" && find /root/.safe-chain -name "*.log" -exec cat {} \; 2>/dev/null || echo "no logs found"
+echo "[debug] /tmp safe-chain:" && ls -la /tmp/*safe* 2>/dev/null || echo "none in /tmp"
+echo "[debug] /tmp aikido:" && ls -la /tmp/*aikido* 2>/dev/null || echo "none in /tmp"
+echo "[debug] all safe-chain files:" && find /root/.safe-chain -type f 2>/dev/null || echo "none"
