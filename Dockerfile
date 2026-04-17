@@ -22,7 +22,7 @@ RUN chmod a+rwx /root && chmod -R a+rwx /root/.safe-chain
 
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
-ENV SAFE_CHAIN_LOGGING=verbose
+ENV SAFE_CHAIN_LOGGING=normal
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
