@@ -17,11 +17,13 @@ chmod 0600 "$NPM_CONFIG"
 
 CMD="$*"
 
-# Debug: verify which yarn binary is being used
+# Debug: verify safe-chain is active
+echo "[debug] whoami: $(whoami)"
 echo "[debug] which yarn: $(which yarn)"
 echo "[debug] HOME=$HOME"
-echo "[debug] ls shims: $(ls /root/.safe-chain/shims/ 2>/dev/null || echo 'not found')"
-cat /root/.safe-chain/shims/yarn 2>/dev/null || echo "[debug] shim file not found"
+echo "[debug] safe-chain binary accessible: $(test -x /root/.safe-chain/bin/safe-chain && echo 'YES' || echo 'NO')"
+echo "[debug] safe-chain version: $(/root/.safe-chain/bin/safe-chain --version 2>&1 || echo 'FAILED')"
+echo "[debug] yarn safe-chain-verify: $(yarn safe-chain-verify 2>&1 || echo 'FAILED')"
 
 if echo "$CMD" | grep -q "^install"; then
   yarn install --frozen-lockfile
