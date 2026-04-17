@@ -9,23 +9,19 @@ RUN pip install --quiet --no-cache-dir awscli==${AWSCLI_VERSION} --break-system-
 RUN npm i -g --force yarn
 
 # Install Aikido Safe Chain v1.4.9 for supply chain protection
-# Use a system-wide install dir so it's accessible to USER node
 RUN apk add --no-cache curl && \
     curl -fsSL https://github.com/AikidoSec/safe-chain/releases/download/1.4.9/install-safe-chain.sh | sh -s -- --ci && \
     apk del curl
-RUN mkdir -p /root/.safe-chain && \
-    printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json && \
-    chmod -R a+rx /root/.safe-chain && \
-    chmod a+x /root/.safe-chain/bin/safe-chain
+
+# Safe Chain config: 30-day minimum package age, exclude @thecloudconnectors scope
+RUN printf '{"minimumPackageAgeHours":720,"npm":{"minimumPackageAgeExclusions":["@thecloudconnectors/*"]}}\n' > /root/.safe-chain/config.json
+
 ENV PATH="/root/.safe-chain/shims:/root/.safe-chain/bin:${PATH}"
 ENV SAFE_CHAIN_MINIMUM_PACKAGE_AGE_HOURS=720
 ENV SAFE_CHAIN_LOGGING=normal
-ENV HOME=/root
 
 COPY entrypoint.sh /entrypoint.sh
-
 RUN chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
-
 CMD ["help"]
