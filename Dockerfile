@@ -1,4 +1,9 @@
-FROM node:lts-alpine3.19
+# Node major version to use (e.g. 20, 22, 24, or lts).
+# Bump this when moving the project to a new Node major, then cut a
+# new release tag (e.g. v1.24-node22).
+ARG NODE_VERSION=22
+
+FROM node:${NODE_VERSION}-alpine
 
 ENV AWSCLI_VERSION='1.18.69'
 
