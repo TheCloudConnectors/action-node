@@ -1,7 +1,7 @@
-# Node major version to use (e.g. 20, 22, 24, or lts).
+# Node major version to use (e.g. 20, 22, 24, 26, or lts).
 # Bump this when moving the project to a new Node major, then cut a
 # new release tag (e.g. v1.24-node22).
-ARG NODE_VERSION=24
+ARG NODE_VERSION=26
 
 FROM node:${NODE_VERSION}-alpine
 

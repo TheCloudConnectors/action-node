@@ -7,7 +7,7 @@ supply-chain protection preinstalled.
 ## Usage
 
 ```yaml
-- uses: TheCloudConnectors/action-node@v1.24
+- uses: TheCloudConnectors/action-node@v1.26-node26
   with:
     cmd: install
   env:
@@ -44,7 +44,7 @@ To move to a newer Node major:
    docker build -t action-node:test .
    docker run --rm --entrypoint node action-node:test -v
    ```
-3. Cut a new release tag (e.g. `v1.25`).
+3. Cut a new release tag named after the Node major (e.g. `v1.26-node26`).
 4. Update consumers to pin the new tag.
 
 ## What's in the image
